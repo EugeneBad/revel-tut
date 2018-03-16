@@ -6,7 +6,9 @@ import (
 
 type Listing struct{
 	gorm.Model
-	Category string
-	Title string
+	Category 	string
+	Title 	  	string
 	Description string `sql:"size:600"`
+	ImageUrl 	string
+	AccountID 	uint
 }

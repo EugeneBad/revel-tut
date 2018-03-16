@@ -23,31 +23,37 @@ func (a Accounts) Login() revel.Result{
 
 	}
 	return nil
-
-
 }
 
 func (a Accounts) Register() revel.Result{
 	method := a.Request.Method
 	switch method {
+
 	case "GET":
 		return a.Render()
+
 	case "POST":
 		var account models.Account
 		a.Params.Bind(&account, "account")
-		//fmt.Println(account)
+
+		if a.Params.Get("confirmPassword") != account.Password{
+			return a.RenderText("Passwords don't match")
+		}
+
 		a.Validation.Required(account.Email)
-		a.Validation.Required(account.Password)
 		a.Validation.Email(account.Email)
+		a.Validation.Required(account.Password)
+
 		if a.Validation.HasErrors(){
-			fmt.Println(a.Validation.Errors)
-			return a.Render()
+			return a.RenderText("Both Email and Password required")
 		}
-		err := app.Db.Create(&models.Account{Email: account.Email, Password: account.Password}).GetErrors()
-		if len(err) != 0{
-			fmt.Println(err)
-			return a.Render()
+		var duplicateUser []models.Account
+
+		if app.Db.Where("email = ?", account.Email).Find(&duplicateUser); len(duplicateUser) != 0 {
+			return a.RenderText("Username Already exists")
 		}
+
+		app.Db.Create(&account)
 
 		return a.RenderTemplate("App/index.html")
 	}

@@ -5,17 +5,18 @@ import (
 	"image"
 	"github.com/eugenebad/massape/app/models"
 	"bytes"
-	"fmt"
 	_ "image/jpeg"
 	_ "image/png"
 	"os"
+	"strings"
+	"bytes"
 )
 
 type Listing struct{
 	*revel.Controller
 }
 
-func (l Listing) Create(pic []byte, ) revel.Result{
+func (l Listing) Create(listingImage []byte, ) revel.Result{
 
 	switch l.Request.Method {
 	case "GET":
@@ -23,12 +24,21 @@ func (l Listing) Create(pic []byte, ) revel.Result{
 	case "POST":
 		var listing models.Listing
 		l.Params.Bind(&listing, "listing")
-		fmt.Println(l.Request.GetForm())
-		f, _ := os.Create("picture")
+
+		l.Validation.Required(listing.Title)
+		l.Validation.Required(listing.Category)
+		l.Validation.Required(listing.Description)
+
+		if l.Validation.HasErrors(){
+			return l.RenderText("All fields required")
+		}
+
+		f, _ := os.Create(strings.Join([]string{"upload/", string(listing.ID)}, ""))
+
 		defer f.Close()
-		f.Write(pic)
-		image.DecodeConfig(bytes.NewReader(pic)) // For validation
-		//return l.Render
+		f.Write(listingImage)
+		image.DecodeConfig(bytes.NewReader(listingImage))
+		return l.Render
 	}
 	return nil
 }
