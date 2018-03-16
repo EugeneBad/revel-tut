@@ -62,6 +62,4 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 var Db, _ = gorm.Open("sqlite3", "massape.db")
 func InitDB(){
 	Db.AutoMigrate(&models.Account{}, &models.Listing{})
-
-
 }
