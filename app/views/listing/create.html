@@ -1,0 +1,60 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<html>
+{{template "sub-templates/_header.html"}}
+<body>
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html"><span>Ma</span>ssape</a>
+        </div>
+    </div>
+</div>
+<section>
+    <div id="page-wrapper" class="sign-in-wrapper">
+        <div class="graphs">
+            <!-- Submit Ad -->
+                <div class="container">
+                    <h2 class="head">Post an Ad</h2>
+                    <div class="post-ad-form">
+                        <form action="{{url "Listing.Create"}}" method="post" enctype="multipart/form-data">
+                            <label>Select Category <span>*</span></label>
+                            <select name="listing.Category" class="">
+                                <option>Select Category</option>
+                                <option>Mobiles</option>
+                                <option>Electronics and Appliances</option>
+                                <option>Cars</option>
+                                <option>Bikes</option>
+                                <option>Furniture</option>
+                                <option>Pets</option>
+                                <option>Books, Sports and hobbies</option>
+                                <option>Fashion</option>
+                                <option>Kids</option>
+                                <option>Services</option>
+                                <option>Real, Estate</option>
+                            </select>
+                            <div class="clearfix"></div>
+                            <label>Ad Title <span>*</span></label>
+                            <input type="text" name="listing.Title" class="phone" placeholder="">
+                            <div class="clearfix"></div>
+                            <label>Ad Description <span>*</span></label>
+                            <textarea name="listing.Description" class="mess" placeholder="Write few lines about your product"></textarea>
+							<label>Photo for your ad :</label>
+                            <input style="margin-top: 10px" type="file" accept="image/*" name="pic"/>
+                            <input type="submit" value="Post">
+						</form>
+                    </div>
+                </div>
+
+            <!-- // Submit Ad -->
+        </div>
+    </div>
+</section>
+</body>
+</html>
