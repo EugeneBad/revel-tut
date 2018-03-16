@@ -26,7 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <form action="{{url "Listing.Create"}}" method="post" enctype="multipart/form-data">
                             <label>Select Category <span>*</span></label>
                             <select name="listing.Category" class="" required>
-                                <option>Select Category</option>
+                                <option>Jobs</option>
                                 <option>Mobiles</option>
                                 <option>Electronics and Appliances</option>
                                 <option>Cars</option>
@@ -46,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <label>Ad Description <span>*</span></label>
                             <textarea name="listing.Description" class="mess" placeholder="Write few lines about your product" required></textarea>
 							<label>Photo for your ad :</label>
-                            <input style="margin-top: 10px" type="file" accept="image/*" name="image" required/>
+                            <input style="margin-top: 10px" type="file" accept="image/*" name="listingImage" required/>
                             <input type="submit" value="Post">
 						</form>
                     </div>

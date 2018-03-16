@@ -7,9 +7,12 @@ import (
 	"bytes"
 	_ "image/jpeg"
 	_ "image/png"
-	"os"
+	//"os"
 	"strings"
-	"bytes"
+	//"github.com/eugenebad/massape/app"
+	"fmt"
+	"github.com/eugenebad/massape/app/utils"
+	"os"
 )
 
 type Listing struct{
@@ -33,12 +36,18 @@ func (l Listing) Create(listingImage []byte, ) revel.Result{
 			return l.RenderText("All fields required")
 		}
 
-		f, _ := os.Create(strings.Join([]string{"upload/", string(listing.ID)}, ""))
+		_, format, err := image.DecodeConfig(bytes.NewReader(listingImage))
 
+		if err != nil {
+			return l.RenderText("Invalid image")
+		}
+		imageUrl := strings.Join([]string{"uploaded/", utils.Randomiser(), ".", format}, "")
+		//app.Db.Create(&models.Listing{Title: listing.Title, Category:listing.Category, Description:listing.Description, ImageUrl:imageUrl, AccountID:1})
+		f, _ := os.Create(imageUrl)
 		defer f.Close()
 		f.Write(listingImage)
-		image.DecodeConfig(bytes.NewReader(listingImage))
-		return l.Render
+		fmt.Println(imageUrl)
+		return l.RenderText("Done")
 	}
 	return nil
 }
