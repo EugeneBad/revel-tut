@@ -3,7 +3,6 @@ package controllers
 import (
 	"github.com/revel/revel"
 	"github.com/eugenebad/massape/app/models"
-	"fmt"
 	"github.com/eugenebad/massape/app"
 )
 
@@ -19,8 +18,21 @@ func (a Accounts) Login() revel.Result{
 	case "POST":
 		var account models.Account
 		a.Params.Bind(&account, "account")
-		fmt.Println(account)
 
+		a.Validation.Required(account.Email)
+		a.Validation.Email(account.Email)
+		a.Validation.Required(account.Password)
+
+		if a.Validation.HasErrors() {
+			return a.RenderText("Check email and password")
+		}
+
+		app.Db.Where("email = ? and password = ?", account.Email, account.Password).First(&account)
+		if account.HasID() {
+			return a.RenderText("Done")
+		}
+
+		return a.RenderText("Check Email and Password")
 	}
 	return nil
 }

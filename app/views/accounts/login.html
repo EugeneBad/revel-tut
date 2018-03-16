@@ -30,13 +30,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<form action="{{url "Accounts.Login"}}" method="post">
 							<div class="log-input">
 								<div class="log-input-left">
-								   <input type="text" name="account.Email" class="user" value="Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Email';}"/>
+								   <input type="text" name="account.Email" class="user" placeholder="Your Email" required/>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
 							<div class="log-input">
 								<div class="log-input-left">
-								   <input type="password" name="account.Password" class="lock" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email address:';}"/>
+								   <input type="password" name="account.Password" class="lock" placeholder="Password" required/>
 								</div>
 								<div class="clearfix"> </div>
 							</div>
