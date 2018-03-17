@@ -9,10 +9,9 @@ type App struct {
 }
 
 func (c App) Index() revel.Result {
-	type Phone struct {
-		Kikka string
+	if c.Session["email"] == "" {
+		return c.Redirect(Accounts.Login)
 	}
-	phone := Phone{Kikka: "XXXXXX"}
 
-	return c.Render(phone)
+	return c.Render()
 }

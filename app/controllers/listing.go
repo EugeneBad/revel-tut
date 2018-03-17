@@ -18,7 +18,9 @@ type Listing struct{
 }
 
 func (l Listing) Create(listingImage []byte, ) revel.Result{
-
+	if l.Session["email"] == ""{
+		return l.Redirect(Accounts.Login)
+	}
 	switch l.Request.Method {
 	case "GET":
 		return l.Render()
@@ -60,4 +62,8 @@ func (l Listing) Create(listingImage []byte, ) revel.Result{
 		return l.RenderText("Done")
 	}
 	return nil
+}
+
+func (l *Listing) Listings() revel.Result{
+	return l.Render()
 }

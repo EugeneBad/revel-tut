@@ -29,6 +29,7 @@ func (a Accounts) Login() revel.Result{
 
 		app.Db.Where("email = ? and password = ?", account.Email, account.Password).First(&account)
 		if account.HasID() {
+			a.Session["email"] = account.Email
 			return a.RenderText("Done")
 		}
 
@@ -66,7 +67,7 @@ func (a Accounts) Register() revel.Result{
 		}
 
 		app.Db.Create(&account)
-
+		a.Session["email"] = account.Email
 		return a.RenderTemplate("App/index.html")
 	}
 	return nil
