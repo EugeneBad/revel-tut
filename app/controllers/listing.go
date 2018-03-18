@@ -42,7 +42,7 @@ func (l Listing) Create(listingImage []byte, ) revel.Result{
 			return l.RenderText("Invalid image")
 		}
 
-		imageUrl := utils.Randomiser()
+		imageUrl := strings.Join([]string{"uploaded/", utils.Randomiser(), ".", format}, "")
 
 		var current_user models.Account
 		app.Db.Where("id = ?", 1).First(&current_user)
@@ -50,12 +50,12 @@ func (l Listing) Create(listingImage []byte, ) revel.Result{
 		new_listing := models.Listing{Title: listing.Title,
 			Category:listing.Category,
 			Description:listing.Description,
-			ImageUrl:imageUrl}
+			ImageUrl: imageUrl}
 
 		current_user.Listings =  append(current_user.Listings, new_listing)
 		app.Db.Save(&current_user)
 
-		f, _ := os.Create(strings.Join([]string{"uploaded/", imageUrl, ".", format}, ""))
+		f, _ := os.Create(imageUrl)
 		defer f.Close()
 		f.Write(listingImage)
 
