@@ -7,14 +7,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 {{template "sub-templates/_header.html"}}
-<body>
-{{template "sub-templates/_banner.html"}}
+<body  style="background-color: #f9f9f9;">
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="/"><span>Ma</span>ssape</a>
+        </div>
+        <div class="header-right">
+            <a class="account" href="{{url "Listing.create"}}">Post Free Ad</a>
+
+        </div>
+    </div>
+
+</div>
+<div>
 	<div class="col-md-8 col-md-push-2">
     <div id="container">
         <h2 class="head">Mobile Phones</h2>
+
         <div class="clearfix"></div>
         <ul class="list">
-            <a href="single.html">
+            <a href="single.html" data-toggle="modal" data-target="#exampleModal">
                 <li>
                     <img src="/image" title="" alt="" width="165" height="150"/>
                     <section class="list-left">
@@ -226,6 +239,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="clearfix"></div>
             </a>
         </ul>
+    </div>
     </div>
 </div>
 </div>
