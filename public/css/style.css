@@ -2656,7 +2656,7 @@ div#myTabContent {
     color: white;
 }
 #container .list li:hover {
-	background:#f3c500;
+	background:#DAA520;
     transition:0.5s all;
 	-webkit-transition:0.8s all;
 	-moz-transition:0.5s all;
